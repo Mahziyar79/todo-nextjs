@@ -30,9 +30,11 @@ const todoList = ({ data, onDeleteTodo }) => {
                   className="h-7 w-7 stroke-red-500"
                 />
               </button>
-              <button>
-                <PencilAltIcon className="h-7 w-7 stroke-blue-500" />
-              </button>
+              <Link href={`/todos/edit/${todo._id}`}>
+                <a>
+                  <PencilAltIcon className="h-7 w-7 stroke-blue-500" />
+                </a>
+              </Link>
             </div>
           </div>
         );
