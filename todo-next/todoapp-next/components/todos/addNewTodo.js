@@ -9,7 +9,7 @@ const TodoForm = ({ onAdd }) => {
 
   return (
     <form
-      className="mt-5 bg-white rounded-lg p-5 w-1/2"
+      className="mt-9 w-full bg-white rounded-lg p-5"
       onSubmit={(e) => onAdd(e, formData, setFormData)}
     >
       <div className="flex flex-col">

@@ -1,11 +1,11 @@
 import axios from "axios";
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import Nav from "../components/navigation/nav";
+import { useState } from "react";
 import TodoForm from "../components/todos/addNewTodo";
 import TodoList from "../components/todos/todoList";
 import Layout from "../containers/Layout";
 import Todo from "../server/models/todo";
+import dbConnect from "../server/utils/dbConnect";
 
 export default function Home({ todos }) {
   const [data, setData] = useState(todos);
@@ -57,7 +57,7 @@ export default function Home({ todos }) {
       </Head>
 
       <Layout>
-        <div className="flex flex-col items-center container xl:max-w-screen-xl mx-auto">
+        <div className="flex flex-col items-center">
           <TodoForm onAdd={addTodo} />
 
           {/* show todo list */}
@@ -73,6 +73,7 @@ export default function Home({ todos }) {
 }
 
 export async function getServerSideProps() {
+  dbConnect();
   const todos = await Todo.find({});
   return {
     props: {

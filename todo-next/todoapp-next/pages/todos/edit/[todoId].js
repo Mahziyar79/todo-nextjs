@@ -29,10 +29,10 @@ const TodoPage = ({ todo }) => {
 
   return (
     <Layout>
-      <div className="container mx-auto mt-5 flex flex-col items-center">
+      <div className="mt-5 flex flex-col items-center">
         <h1 className="font-bold text-2xl">Edit Todo</h1>
         <form
-          className="mt-5 bg-white rounded-lg p-5 w-1/2"
+          className="mt-5 w-full bg-white rounded-lg p-5"
           onSubmit={(e) => OnEditHandler(e)}
         >
           <div className="flex flex-col">

@@ -6,7 +6,7 @@ const todoList = ({ data, onDeleteTodo , onCompleteTodo }) => {
     return <h2 className="font-bold text-2xl mt-12">Please Add Some Todos!</h2>;
   }
   return (
-    <div className="container p-8 xl:max-w-screen-xl mx-auto bg-white rounded-lg mt-12">
+    <div className="w-full p-8  bg-white rounded-lg mt-12">
       {data.map((todo) => {
         return (
           <div

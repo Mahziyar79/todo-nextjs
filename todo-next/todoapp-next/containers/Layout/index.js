@@ -5,8 +5,10 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Header />
-      {children}
-      <Footer />
+      <div className="container xl:max-w-screen-lg mx-auto">
+        {children}
+      </div>
+      {/* <Footer /> */}
     </div>
   );
 };
