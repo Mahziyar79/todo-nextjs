@@ -1,7 +1,7 @@
 import { TrashIcon, PencilAltIcon, CheckIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 
-const todoList = ({ data, onDeleteTodo }) => {
+const todoList = ({ data, onDeleteTodo , onCompleteTodo }) => {
   if (!data.length) {
     return <h2 className="font-bold text-2xl mt-12">Please Add Some Todos!</h2>;
   }
@@ -16,13 +16,21 @@ const todoList = ({ data, onDeleteTodo }) => {
             <div>
               <Link href={`/todos/${todo._id}`}>
                 <a>
-                  <h1 className="text-xl">{todo.title}</h1>
+                  <h1
+                    className={`text-xl ${todo.isCompleted && "line-through"}`}
+                  >
+                    {todo.title}
+                  </h1>
                 </a>
               </Link>
             </div>
             <div className="flex items-center gap-x-3">
-              <button>
-                <CheckIcon className="h-7 w-7 stroke-green-500" />
+              <button onClick={()=> onCompleteTodo(todo._id)}>
+                {todo.isCompleted ? (
+                  <CheckIcon className="h-7 w-7 stroke-green-500" />
+                ) : (
+                  <span className="w-5 h-5 block border-2 border-gray-600 rounded-full"></span>
+                )}
               </button>
               <button>
                 <TrashIcon

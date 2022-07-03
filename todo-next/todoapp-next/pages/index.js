@@ -6,7 +6,7 @@ import TodoForm from "../components/todos/addNewTodo";
 import TodoList from "../components/todos/todoList";
 import Todo from "../server/models/todo";
 
-export default function Home({todos}) {
+export default function Home({ todos }) {
   const [data, setData] = useState(todos);
 
   // delete function
@@ -32,11 +32,19 @@ export default function Home({todos}) {
         })
         .catch((err) => console.log(err));
       setFormData({ title: "", description: "" });
-    }else{
-      alert('please fill out title and description');
+    } else {
+      alert("please fill out title and description");
     }
   };
 
+  const completeHandler = (id) => {
+    axios
+        .put(`/api/todos/complete/${id}`)
+        .then((res) => {
+          setData(res.data.todos);
+        })
+        .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -52,18 +60,21 @@ export default function Home({todos}) {
         <TodoForm onAdd={addTodo} />
 
         {/* show todo list */}
-        <TodoList data={data} onDeleteTodo={deleteHandler} />
+        <TodoList
+          data={data}
+          onDeleteTodo={deleteHandler}
+          onCompleteTodo={completeHandler}
+        />
       </div>
     </div>
   );
 }
 
-
-export async function getServerSideProps(){
+export async function getServerSideProps() {
   const todos = await Todo.find({});
   return {
-      props : {
-        todos : JSON.parse(JSON.stringify(todos))
-      }
-  }
+    props: {
+      todos: JSON.parse(JSON.stringify(todos)),
+    },
+  };
 }
