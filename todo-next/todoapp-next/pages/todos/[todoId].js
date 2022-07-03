@@ -1,26 +1,27 @@
+import Layout from "../../containers/Layout";
 import { getOneTodo } from "../api/todos/[todoId]";
 
-const TodoPage = ({todo}) => {
-    console.log(todo);
-    return ( 
-        <div>
+const TodoPage = ({ todo }) => {
+  console.log(todo);
+  return (
+    <Layout>
+      <div>
+        <h1>Todo Single Page</h1>
+        <h2>Title : {todo.title}</h2>
+        <p>Description : {todo.description}</p>
+      </div>
+    </Layout>
+  );
+};
 
-            <h1>Todo Single Page</h1>
-            <h2>Title : {todo.title}</h2>
-            <p>Description : {todo.description}</p>
-        </div>
-     );
-}
- 
 export default TodoPage;
 
-
-export async function getServerSideProps(context){
-    const {query} = context;
-    const todo = await getOneTodo(query)
-    return {
-        props : {
-            todo : JSON.parse(JSON.stringify(todo))
-        }
-    }
-} 
+export async function getServerSideProps(context) {
+  const { query } = context;
+  const todo = await getOneTodo(query);
+  return {
+    props: {
+      todo: JSON.parse(JSON.stringify(todo)),
+    },
+  };
+}

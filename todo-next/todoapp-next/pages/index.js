@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Nav from "../components/navigation/nav";
 import TodoForm from "../components/todos/addNewTodo";
 import TodoList from "../components/todos/todoList";
+import Layout from "../containers/Layout";
 import Todo from "../server/models/todo";
 
 export default function Home({ todos }) {
@@ -37,13 +38,14 @@ export default function Home({ todos }) {
     }
   };
 
+  // complete todo
   const completeHandler = (id) => {
     axios
-        .put(`/api/todos/complete/${id}`)
-        .then((res) => {
-          setData(res.data.todos);
-        })
-        .catch((err) => console.log(err));
+      .put(`/api/todos/complete/${id}`)
+      .then((res) => {
+        setData(res.data.todos);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -53,19 +55,19 @@ export default function Home({ todos }) {
         <meta name="description" content="todo app with next.js and mongodb" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* navigation */}
-      <Nav />
 
-      <div className="flex flex-col items-center container xl:max-w-screen-xl mx-auto">
-        <TodoForm onAdd={addTodo} />
+      <Layout>
+        <div className="flex flex-col items-center container xl:max-w-screen-xl mx-auto">
+          <TodoForm onAdd={addTodo} />
 
-        {/* show todo list */}
-        <TodoList
-          data={data}
-          onDeleteTodo={deleteHandler}
-          onCompleteTodo={completeHandler}
-        />
-      </div>
+          {/* show todo list */}
+          <TodoList
+            data={data}
+            onDeleteTodo={deleteHandler}
+            onCompleteTodo={completeHandler}
+          />
+        </div>
+      </Layout>
     </div>
   );
 }
